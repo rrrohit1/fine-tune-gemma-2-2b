@@ -2,6 +2,33 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
+
+# Project root directory
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
+# Data paths
+RAW_DATA_DIR = ROOT_DIR / "data" / "raw"
+PROCESSED_DATA_DIR = ROOT_DIR / "data" / "processed"
+
+# Ensure directories exist
+RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
+PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+# Data file paths
+MEDICAL_TRANSCRIPTIONS_FILE = RAW_DATA_DIR / "mtsamples.csv"
+PROCESSED_DATASET_FILE = PROCESSED_DATA_DIR / "processed_transcriptions.csv"
+
+# Model configuration
+LLM_NAME = "google/gemma-2b"
+MODEL_OUTPUT_DIR = ROOT_DIR / "models"
+MODEL_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Kaggle configuration
+KAGGLE_USERNAME = os.getenv("KAGGLE_USERNAME")
+KAGGLE_KEY = os.getenv("KAGGLE_KEY")
+
 # Load environment variables from .env file
 load_dotenv()
 
