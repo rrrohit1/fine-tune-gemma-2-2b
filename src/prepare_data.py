@@ -1,6 +1,8 @@
 import pandas as pd
 from datasets import Dataset
 from config import MEDICAL_TRANSCRIPTIONS_FILE, PROCESSED_DATASET_FILE
+import os
+from pathlib import Path
 
 def prepare_data_for_pretraining(csv_path: str = MEDICAL_TRANSCRIPTIONS_FILE, 
                                output_path: str = PROCESSED_DATASET_FILE):
@@ -36,7 +38,25 @@ def prepare_data_for_pretraining(csv_path: str = MEDICAL_TRANSCRIPTIONS_FILE,
     
     return dataset
 
+def validate_paths(csv_path: str, output_path: str):
+    # Check if the input CSV file exists
+    if not Path(csv_path).exists():
+        raise FileNotFoundError(f"Input CSV file not found: {csv_path}")
 
+    # Check if the output directory exists, create if not
+    output_dir = Path(output_path).parent
+    if not output_dir.exists():
+        print(f"Output directory not found. Creating: {output_dir}")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+# Wrap the main logic with error handling
 if __name__ == "__main__":
-    # Process and save the dataset
-    dataset = prepare_data_for_pretraining()
+    try:
+        validate_paths(MEDICAL_TRANSCRIPTIONS_FILE, PROCESSED_DATASET_FILE)
+        dataset = prepare_data_for_pretraining()
+    except FileNotFoundError as e:
+        print(f"❌ Error: {e}")
+    except ValueError as e:
+        print(f"❌ Error: {e}")
+    except Exception as e:
+        print(f"❌ An unexpected error occurred: {e}")
