@@ -10,7 +10,7 @@ def parse_args():
     )
     
     # Training parameters
-    parser.add_argument('--model_name', type=str, default=LLM_NAME,
+    parser.add_argument('--model_name', type=str, default=LLM_NAME["llama"],
                       help='Name of the model to fine-tune')
     parser.add_argument('--max_length', type=int, default=1024,
                       help='Maximum sequence length for tokenization')

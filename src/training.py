@@ -9,7 +9,7 @@ from transformers import (
 from config import LLM_NAME, PROCESSED_DATASET_FILE, MODEL_OUTPUT_DIR
 
 def pre_training(
-    model_name: str = LLM_NAME,
+    model_name: str = LLM_NAME["llama"],
     dataset_path: str = PROCESSED_DATASET_FILE,
     output_dir: str = MODEL_OUTPUT_DIR,
     max_length: int = 1024,

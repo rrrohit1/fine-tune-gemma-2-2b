@@ -21,7 +21,10 @@ MEDICAL_TRANSCRIPTIONS_FILE = RAW_DATA_DIR / "mtsamples.csv"
 PROCESSED_DATASET_FILE = PROCESSED_DATA_DIR / "processed_transcriptions.csv"
 
 # Model configuration
-LLM_NAME = "google/gemma-2b"
+LLM_NAME = {
+    "llama": "meta-llama/Llama-3.2-1B",
+    "gemma": "google/gemma-2b"
+}
 MODEL_OUTPUT_DIR = ROOT_DIR / "models"
 MODEL_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
